@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Laboration_1_Rasmus_Serrestam.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Laboration_1_Rasmus_Serrestam
 {
@@ -6,6 +8,7 @@ namespace Laboration_1_Rasmus_Serrestam
     {
         public static MauiApp CreateMauiApp()
         {
+            // Defualt template code
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -18,6 +21,14 @@ namespace Laboration_1_Rasmus_Serrestam
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+
+            // FileSystem.AppDataDirectory är en katalog som är avsedd för applikationens egna data på enheten alltså lokalt på telefånen eller emulatorn
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Marketplace.db3");
+            builder.Services.AddDbContextFactory<ApplicationDbContext>(options => options.UseSqlite($"Data Source={databasePath}"));
+            builder.Services.AddSingleton<DatabaseInitializer>();
+
+
 
             return builder.Build();
         }

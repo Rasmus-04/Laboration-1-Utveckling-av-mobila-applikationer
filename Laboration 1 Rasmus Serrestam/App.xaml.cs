@@ -1,17 +1,56 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Laboration_1_Rasmus_Serrestam.Data;
 
-namespace Laboration_1_Rasmus_Serrestam
+namespace Laboration_1_Rasmus_Serrestam;
+
+public partial class App : Application
 {
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+    private readonly DatabaseInitializer _databaseInitializer;
 
-        protected override Window CreateWindow(IActivationState? activationState)
+    public App(DatabaseInitializer databaseInitializer)
+    {
+        InitializeComponent();
+
+        _databaseInitializer = databaseInitializer;
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        // Visa en laddningsindikator medan databasen initieras.
+        var window = new Window(new ContentPage
         {
-            return new Window(new AppShell());
+            Content = new ActivityIndicator
+            {
+                IsRunning = true,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center
+            }
+        });
+
+        InitializeDatabaseAsync(window);
+
+        return window;
+    }
+
+    private async void InitializeDatabaseAsync(Window window)
+    {
+        try
+        {
+            await _databaseInitializer.InitializeAsync();
+
+            // Visa appens startsida när databasen är klar.
+            window.Page = new AppShell();
+        }
+        catch (Exception ex)
+        {
+            window.Page = new ContentPage
+            {
+                Content = new Label
+                {
+                    Text = $"Could not initialize database: {ex.Message}",
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
+                }
+            };
         }
     }
 }
