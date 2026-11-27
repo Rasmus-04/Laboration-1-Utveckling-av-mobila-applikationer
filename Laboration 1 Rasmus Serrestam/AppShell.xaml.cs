@@ -1,4 +1,5 @@
 ﻿using Laboration_1_Rasmus_Serrestam.ViewModels;
+using Laboration_1_Rasmus_Serrestam.Views;
 
 namespace Laboration_1_Rasmus_Serrestam
 {
@@ -14,6 +15,9 @@ namespace Laboration_1_Rasmus_Serrestam
                 Content = mainPage,
                 Route = "MainPage"
             });
+
+
+            Routing.RegisterRoute("ItemDetailsPage", typeof(ItemDetailsPage));
         }
     }
 }

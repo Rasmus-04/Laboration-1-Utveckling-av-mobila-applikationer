@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using Laboration_1_Rasmus_Serrestam.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Laboration_1_Rasmus_Serrestam.Data;
 using Laboration_1_Rasmus_Serrestam.Services;
 using Laboration_1_Rasmus_Serrestam.ViewModels;
+using Laboration_1_Rasmus_Serrestam.Views;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Laboration_1_Rasmus_Serrestam
 {
@@ -36,6 +37,9 @@ namespace Laboration_1_Rasmus_Serrestam
 
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<MainPage>();
+
+            builder.Services.AddTransient<ItemDetailsViewModel>();
+            builder.Services.AddTransient<ItemDetailsPage>();
 
 
             return builder.Build();

@@ -12,7 +12,9 @@
             FontAttributes="Bold"
             HorizontalOptions="Center" />
 
-        <CollectionView ItemsSource="{Binding Items}">
+        <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single" 
+                        SelectionChangedCommand="{Binding SelectItemCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
 
             <CollectionView.EmptyView>
                 <Label

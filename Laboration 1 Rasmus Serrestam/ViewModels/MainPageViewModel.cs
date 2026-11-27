@@ -20,12 +20,15 @@ namespace Laboration_1_Rasmus_Serrestam.ViewModels
         }
 
         public ICommand LoadItemsCommand { get; }
+        public ICommand SelectItemCommand { get; }
 
         public MainPageViewModel(ItemService itemService)
         {
             _itemService = itemService;
 
             LoadItemsCommand = new Command(async () => await LoadItemsAsync());
+
+            SelectItemCommand = new Command<Item>(async (item) => await SelectItemAsync(item));
         }
 
         public async Task LoadItemsAsync()
@@ -50,6 +53,14 @@ namespace Laboration_1_Rasmus_Serrestam.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private async Task SelectItemAsync(Item item)
+        {
+            if (item == null)
+                return;
+
+            await Shell.Current.GoToAsync($"ItemDetailsPage?itemId={item.Id}");
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Laboration_1_Rasmus_Serrestam
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
             await _viewModel.LoadItemsAsync();
         }
     }
