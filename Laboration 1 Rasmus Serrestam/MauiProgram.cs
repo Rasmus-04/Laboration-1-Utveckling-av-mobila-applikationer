@@ -2,6 +2,7 @@
 using Laboration_1_Rasmus_Serrestam.Data;
 using Microsoft.EntityFrameworkCore;
 using Laboration_1_Rasmus_Serrestam.Services;
+using Laboration_1_Rasmus_Serrestam.ViewModels;
 
 namespace Laboration_1_Rasmus_Serrestam
 {
@@ -27,9 +28,14 @@ namespace Laboration_1_Rasmus_Serrestam
             // FileSystem.AppDataDirectory är en katalog som är avsedd för applikationens egna data på enheten alltså lokalt på telefånen eller emulatorn
             var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Marketplace.db3");
             builder.Services.AddDbContextFactory<ApplicationDbContext>(options => options.UseSqlite($"Data Source={databasePath}"));
+
             builder.Services.AddSingleton<DatabaseInitializer>();
             builder.Services.AddTransient<ItemService>();
 
+            builder.Services.AddTransient<AppShell>();
+
+            builder.Services.AddTransient<MainPageViewModel>();
+            builder.Services.AddTransient<MainPage>();
 
 
             return builder.Build();

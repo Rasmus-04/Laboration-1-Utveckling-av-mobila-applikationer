@@ -5,12 +5,14 @@ namespace Laboration_1_Rasmus_Serrestam;
 public partial class App : Application
 {
     private readonly DatabaseInitializer _databaseInitializer;
+    private readonly AppShell _appShell;
 
-    public App(DatabaseInitializer databaseInitializer)
+    public App(DatabaseInitializer databaseInitializer, AppShell appShell)
     {
         InitializeComponent();
 
         _databaseInitializer = databaseInitializer;
+        _appShell = appShell;
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
@@ -38,7 +40,7 @@ public partial class App : Application
             await _databaseInitializer.InitializeAsync();
 
             // Visa appens startsida när databasen är klar.
-            window.Page = new AppShell();
+            window.Page = _appShell;
         }
         catch (Exception ex)
         {

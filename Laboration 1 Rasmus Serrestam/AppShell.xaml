@@ -3,12 +3,6 @@
     x:Class="Laboration_1_Rasmus_Serrestam.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Laboration_1_Rasmus_Serrestam"
-    Title="Laboration_1_Rasmus_Serrestam">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    Title="Marketplace">
 
 </Shell>
