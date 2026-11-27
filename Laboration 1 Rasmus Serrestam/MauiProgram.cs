@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Laboration_1_Rasmus_Serrestam.Data;
 using Microsoft.EntityFrameworkCore;
+using Laboration_1_Rasmus_Serrestam.Services;
 
 namespace Laboration_1_Rasmus_Serrestam
 {
@@ -27,6 +28,7 @@ namespace Laboration_1_Rasmus_Serrestam
             var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Marketplace.db3");
             builder.Services.AddDbContextFactory<ApplicationDbContext>(options => options.UseSqlite($"Data Source={databasePath}"));
             builder.Services.AddSingleton<DatabaseInitializer>();
+            builder.Services.AddTransient<ItemService>();
 
 
 

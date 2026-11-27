@@ -18,8 +18,8 @@ public class DatabaseInitializer
 
         // Create database and tables if they do not exist
         await context.Database.EnsureCreatedAsync();
-        await context.Database.EnsureCreatedAsync();
 
+        // Filsökvägen till databasen
         //System.Diagnostics.Debug.WriteLine($"Database path: {FileSystem.AppDataDirectory}");
 
         // Seed data only if the database is empty
